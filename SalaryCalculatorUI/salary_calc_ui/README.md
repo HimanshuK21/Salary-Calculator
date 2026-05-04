@@ -9,6 +9,11 @@ A small React + TypeScript UI built with Vite that provides a front-end for the 
 - Responsive layout for desktop and mobile
 - Built with React, TypeScript, and Vite for fast development
 
+## UI Screenshot
+<img width="881" height="1064" alt="image" src="https://github.com/user-attachments/assets/659ae156-0251-4a42-b13c-e9abd74ea6c1" />
+
+
+
 ## Tech Stack
 
 - React 18
@@ -68,14 +73,5 @@ VITE_API_BASE_URL=https://api.example.com
 
 Access `import.meta.env.VITE_API_BASE_URL` from the client code.
 
-## Contributing
-
-Contributions are welcome. Create a branch, add changes, and open a pull request. Keep changes focused and add brief descriptions for UI tweaks or feature additions.
-
-## License
-
-Specify a license for the project (e.g., MIT) or add a `LICENSE` file.
-
----
 
 
