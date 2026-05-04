@@ -1,30 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import { getSalaryBreakUp } from './api/getSalaryBreakUp';
-import { IncomeTax, InHandSalary, PeriodicDropdown, PFContribution, SalaryBreakUp, TypePeriodicDropdown } from './types/SalaryBreakUp';
 import styled from 'styled-components';
+import React, { useEffect, useState } from 'react'
+import { getSalaryBreakUp } from './api/getSalaryBreakUp'
+import { IncomeTax, InHandSalary, PeriodicDropdown, PFContribution, SalaryBreakUp, TypePeriodicDropdown } from './types/SalaryBreakUp'
 
 const SalaryCalcFields = () => {
-    return (
-        <div>
-            <FieldDisclaimer />
-            <FieldDetails />
-        </div>
-    )
+  return (
+    <div className="app-content-section">
+      <FieldDisclaimer />
+      <FieldDetails />
+    </div>
+  )
 }
 
-const FieldDisclaimer = () => {
-    return (
-        <FieldDislcalimerStyle>
-            <h5>Provide Annual CTC (i.e 30 Lakhs Rs. per Annum) and TaxSlab for the calculations</h5>
-        </FieldDislcalimerStyle>
-    );
-}
-
-const FieldDislcalimerStyle = styled.div`
-    >h5 {
-        margin : 0px;
-    }
-`;
+const FieldDisclaimer = () => (
+  <div className="form-disclaimer">
+    <p>Provide Annual CTC (i.e 30 Lakhs Rs. per Annum) and Tax Slab for the calculations</p>
+  </div>
+)
 
 const FieldDetails = () => {
     const [CTC, setCTC] = useState<string>('');
@@ -51,7 +43,7 @@ const FieldDetails = () => {
     }, [inHand, tax, pf]);
 
     const onAnnualCTCChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        var salary = e.target.value;
+        const salary = e.target.value;
         if (!salary || salary.match(/^\d{1,}(\.\d{0,4})?$/)) {
             if (parseFloat(salary) > 150) {
                 alert("Please provide the annual CTC like 30 Lakhs Rs. per Annum. Our system range is from 1 to 150");
@@ -63,7 +55,7 @@ const FieldDetails = () => {
     }
 
     const onBasicSalaryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        var salary = e.target.value;
+        const salary = e.target.value;
         if (CTC && (!salary || salary.match(/^\d{1,}(\.\d{0,4})?$/))) {
             if (parseFloat(salary) > parseFloat(CTC) * 100000) {
                 alert("Basic Pay cannot be grater than CTC");
@@ -167,93 +159,109 @@ const FieldDetails = () => {
 
 
     return (
-        <div>
-            <FlexBox>
-                <CTCBox>
+        <div className='form-section'>
+            <div className='form-field-row'>
+                <div className='form-field'>
                     <span>
                         CTC :
-                        <input type='text' placeholder='Annual CTC' value={CTC} onChange={onAnnualCTCChange} />
+                        <input type='text' className='input-field' placeholder='Annual CTC' value={CTC} onChange={onAnnualCTCChange} />
 
                         Lakhs Rs. / Annum
                     </span>
-                </CTCBox>
-                <CTCBox>
+                </div>
+                <div className='form-field'>
                     <span>
                         Basic Salary(Optional) :
-                        <input type='text' placeholder='Basic Salary' value={basicSalary} onChange={onBasicSalaryChange} /> / Annum
+                        <input type='text' className='input-field' placeholder='Basic Salary' value={basicSalary} onChange={onBasicSalaryChange} /> / Annum
                     </span>
-                </CTCBox>
-                <TaxSlabBox>
-                    <TaxSlabText>  Tax Slab  </TaxSlabText>
-                    <TaxSlabLevel>
-                        <input type='checkbox' onChange={toggleTaxSlab} checked={isNewTaxSlab} />
-                        <span className='slider'></span>
-                    </TaxSlabLevel>
-                </TaxSlabBox>
-            </FlexBox>
-            <FlexBox>
-            <TaxSlabBox>
-                    <TaxSlabText>  Is Gratuity in CTC  </TaxSlabText>
-                    <EmployerPFLevel>
+                </div>
+            </div>
+            <div className='form-field-row' >
+            
+                <div className="form-field">
+  <span className="input-label">Tax Slab</span>
+  <label className="toggle-switch">
+    <input
+      type="checkbox"
+      checked={isNewTaxSlab}
+      onChange={toggleTaxSlab}
+    />
+    <span className="slider tax-label" />
+  </label>
+</div>
+<div className='form-field'>
+                    <span className='input-label'>  Is Gratuity in CTC  </span>
+                    <label className='toggle-switch'>
                         <input type='checkbox' onChange={toggleGratuity} checked={isGratuity} />
-                        <span className='slider'></span>
-                    </EmployerPFLevel>
-                </TaxSlabBox>
-                <TaxSlabBox>
-                    <TaxSlabText>  Is Employer PF Contribution in CTC  </TaxSlabText>
-                    <EmployerPFLevel>
+                        <span className='slider nonTax-label'></span>
+                    </label>
+                    </div>
+                    <div className='form-field'>
+                    <span className='input-label'>  Is Employer PF Contribution in CTC  </span>
+                    <label className='toggle-switch'>
                         <input type='checkbox' onChange={toggleEmployerPF} checked={isEmployerPF} />
-                        <span className='slider'></span>
-                    </EmployerPFLevel>
-                </TaxSlabBox>
-            </FlexBox>
-            <FlexBox>
-                <ButtonStyled onClick={onButtonClick}>
-                    Calculate Total Salary
-                </ButtonStyled>
-            </FlexBox>
-            {salaryBreakUp && (<><hr /> <FlexBox>
+                        <span className='slider nonTax-label'></span>
+                    </label>
+                </div>
+            </div>
+            <div className='form-field-row'>
+                <button type="button" className="btn btn-success btn-block" onClick={onButtonClick}>
+                     Calculate Total Salary
+                </button>
+            </div>
+            {salaryBreakUp && (<><hr /> <div className='form-field-row'>
 
-                <SalaryBreakUpStyle>
-                    <StyledSpan>InHand Salary :</StyledSpan>
-                    <StyledInput>
-                        <input type='number' value={selectedInHand} disabled={true} />
-                        <select value={inHandPeriod} onChange={onInHandPeriodChange}>
+                <div className="result-card">
+  <p className="result-label">InHand Salary</p>
+
+  <div className="input-group">
+    <input
+      type="number"
+      className="input-field"
+      value={selectedInHand}
+      disabled
+    />
+
+    <select
+      className="select-field"
+      value={inHandPeriod}
+      onChange={onInHandPeriodChange}
+    >
+      {PeriodicDropdowns.map(key => (
+        <option key={key} value={key}>
+          {key}
+        </option>
+      ))}
+    </select>
+  </div>
+</div>
+                <div className="result-card">
+                    <p className='result-label'>Income Tax Applicable :</p>
+                    <div className='input-group'>
+                        <input  className="input-field" type='number' value={selectedTax} disabled={true} />
+                        <select className="select-field" value={taxPeriod} onChange={onTaxPeriodChange}>
                             {PeriodicDropdowns.map(key => (
                                 <option key={key} value={key}>
                                     {key}
                                 </option>
                             ))}
                         </select>
-                    </StyledInput>
-                </SalaryBreakUpStyle>
-                <SalaryBreakUpStyle>
-                    <StyledSpan>Income Tax Applicable :</StyledSpan>
-                    <StyledInput>
-                        <input type='number' value={selectedTax} disabled={true} />
-                        <select value={taxPeriod} onChange={onTaxPeriodChange}>
+                    </div>
+                </div>
+                <div className="result-card">
+                    <p className='result-label'>PF Contribution from CTC :</p>
+                    <div className='input-group'>
+                        <input  className="input-field" type='number' value={selectedPF} disabled={true} />
+                        <select className="select-field" value={pfPeriod} onChange={onPFChange}>
                             {PeriodicDropdowns.map(key => (
                                 <option key={key} value={key}>
                                     {key}
                                 </option>
                             ))}
                         </select>
-                    </StyledInput>
-                </SalaryBreakUpStyle>
-                <SalaryBreakUpStyle>
-                    <StyledSpan>PF Contribution from CTC :</StyledSpan>
-                    <StyledInput>
-                        <input type='number' value={selectedPF} disabled={true} />
-                        <select value={pfPeriod} onChange={onPFChange}>
-                            {PeriodicDropdowns.map(key => (
-                                <option key={key} value={key}>
-                                    {key}
-                                </option>
-                            ))}
-                        </select>
-                    </StyledInput>
-                </SalaryBreakUpStyle>
-            </FlexBox>
+                    </div>
+                </div>
+            </div>
             </>
             )}
 
@@ -261,162 +269,4 @@ const FieldDetails = () => {
     );
 }
 
-
-const ButtonStyled = styled.button`
-   
-    padding : 10px;
-    border-radius : 10px;
-    border : 2px solid white;
-    color : white;
-    background-color : #ffffff00;
-    font-weight : 500;
-    cursor : pointer;
-    margin-bottom : 20px;
-  
-`;
-
-const CTCBox = styled.div`
-    display : flex;
-    input {
-       margin-right : 10px !important;
-    }
-    input::placeholder {
-      color: #ccd7e3;
-    } 
-`;
-
-const FlexBox = styled.div`
-  display : flex;
-  gap : 55px;
-  margin-left: auto;
-  margin-right: auto;
-  width: fit-content;
-  margin-top : 25px;
-  input , select {
-     background-color : #ffffff00;
-     padding: 12px 20px;
-     margin: 8px 0;
-     display: inline-block;
-     border: 1px solid #ccc;
-     border-radius: 4px;
-     box-sizing: border-box;
-   }
-
-   select {
-     width : 120px;
-     max-width : 250px;
-     border: none;
-     color: white;
-   }
-
-   select option {
-     width : 250px;
-     background-color : rgb(113, 143, 175);
-   }
-   select:focus-visible {
-    outline: none;
-}
-
-`;
-
-const StyledInput = styled.div`
-  border: 1px solid #ccc;
-  margin-top : 5px;
-    border-radius: 4px;
-    height : 40px;
-    input , select {
-     border-radius: 0px;
-     border: none;
-     margin : 0;
-   }
-
-`
-
-const StyledSpan = styled.span`
-   margin: 19px 10px 0 0;
-`;
-
-const SalaryBreakUpStyle = styled.div`
-   display : flex;
-`;
-
-const TaxSlabBox = styled.div`
-   display: flex;
-`
-
-const TaxSlabText = styled.span`
-   margin: 19px 12px 0 0;
-`;
-
-const TaxSlabLevel = styled.label`
-   position: relative;
-   display: inline-block;
-   width: 60px;
-   height: 34px;
-   margin : 10px 0;
-
-
-  input {
-   opacity: 0;
-   width: 0;
-   height: 0;
-  }
-
-  .slider {
-   position: absolute;
-   cursor: pointer;
-   top: 0;
-   left: 0;
-   right: 0;
-   bottom: 0;
-   background-color: #ccc;
-   -webkit-transition: .4s;
-   transition: .4s;
-   border-radius: 20px;
-  }
-
-  .slider:before {
-   position: absolute;
-   content: "Old";
-   font-size : 10px;
-   text-align : center;
-   font-weight: bold;
-   line-height: 1;
-   padding: 9px 4px;
-   background-color: #2196F3;
-   height: 10px;
-   width: 20px;
-   left: 4px;
-   bottom: 4px;
-   -webkit-transition: .4s;
-   transition: .4s;
-   border-radius: 50%;
-}
-
-  input:checked + .slider {
-   background-color: #ebf7fc;
-}
-
-  input:focus + .slider {
-   box-shadow: 0 0 1px #2196F3;
-}
-
-  input:checked + .slider:before {
-   -webkit-transform: translateX(26px);
-   -ms-transform: translateX(26px);
-   transform: translateX(26px);
-   content: "New";
-}
-
-`;
-
-const EmployerPFLevel = styled(TaxSlabLevel)`
-   input:checked + .slider:before {
-   content : 'Yes';
-}
-   .slider:before {
-    content : 'No';
-}
-
-`;
 export default SalaryCalcFields

@@ -1,0 +1,473 @@
+/* ================================================
+   ANIMATIONS
+   ================================================ */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* ================================================
+   ANIMATION UTILITY CLASSES
+   ================================================ */
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.animate-slide-up {
+    animation: slideInUp 0.5s ease-out;
+}
+
+.animate-slide-down {
+    animation: slideInDown 0.5s ease-out;
+}
+
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-bounce {
+    animation: bounce 1s infinite;
+}
+
+/* ================================================
+   HOVER EFFECTS
+   ================================================ */
+
+.hover-lift {
+    transition: all var(--transition-base);
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.hover-scale {
+    transition: all var(--transition-base);
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.hover-color-primary {
+    transition: all var(--transition-base);
+    color: var(--neutral-700);
+}
+
+.hover-color-primary:hover {
+    color: var(--primary-600);
+}
+
+/* ================================================
+   FOCUS EFFECTS
+   ================================================ */
+
+.focus-outline {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    transition: outline-color var(--transition-base);
+}
+
+.focus-outline:focus {
+    outline-color: var(--primary-400);
+}
+
+/* ================================================
+   LOADING STATES
+   ================================================ */
+
+.is-loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.loading-skeleton {
+    background: linear-gradient(90deg,
+            var(--neutral-200) 0%,
+            var(--neutral-100) 50%,
+            var(--neutral-200) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* ================================================
+   SUCCESS & ERROR STATES
+   ================================================ */
+
+.state-success {
+    color: var(--success-600);
+    background-color: var(--success-100);
+    border-color: var(--success-300);
+}
+
+.state-error {
+    color: var(--error-600);
+    background-color: var(--error-100);
+    border-color: var(--error-300);
+}
+
+.state-warning {
+    color: var(--warning-600);
+    background-color: var(--warning-100);
+    border-color: var(--warning-300);
+}
+
+.state-info {
+    color: var(--info-600);
+    background-color: var(--info-100);
+    border-color: var(--info-300);
+}
+
+/* ================================================
+   DISABLED STATES
+   ================================================ */
+
+.is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ================================================
+   LIGHT MODE / DARK MODE
+   ================================================ */
+
+.light-mode {
+    color-scheme: light;
+}
+
+.dark-mode {
+    color-scheme: dark;
+}
+
+/* ================================================
+   GLASS MORPHISM EFFECT
+   ================================================ */
+
+.glass {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+/* ================================================
+   GRADIENT EFFECTS
+   ================================================ */
+
+.gradient-primary {
+    background: var(--gradient-primary);
+    color: var(--neutral-white);
+}
+
+.gradient-success {
+    background: var(--gradient-success);
+    color: var(--neutral-white);
+}
+
+.gradient-warning {
+    background: var(--gradient-warning);
+    color: var(--neutral-900);
+}
+
+.gradient-error {
+    background: var(--gradient-error);
+    color: var(--neutral-white);
+}
+
+.gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ================================================
+   SPACING RESET
+   ================================================ */
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+/* ================================================
+   CLEARFIX
+   ================================================ */
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* ================================================
+   ASPECT RATIO
+   ================================================ */
+
+.aspect-square {
+    aspect-ratio: 1 / 1;
+}
+
+.aspect-video {
+    aspect-ratio: 16 / 9;
+}
+
+/* ================================================
+   CURSOR UTILITIES
+   ================================================ */
+
+.cursor-auto {
+    cursor: auto;
+}
+
+.cursor-default {
+    cursor: default;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.cursor-wait {
+    cursor: wait;
+}
+
+.cursor-text {
+    cursor: text;
+}
+
+.cursor-move {
+    cursor: move;
+}
+
+.cursor-help {
+    cursor: help;
+}
+
+.cursor-not-allowed {
+    cursor: not-allowed;
+}
+
+/* ================================================
+   USER SELECT UTILITIES
+   ================================================ */
+
+.select-none {
+    user-select: none;
+}
+
+.select-text {
+    user-select: text;
+}
+
+.select-all {
+    user-select: all;
+}
+
+/* ================================================
+   TRANSFORM UTILITIES
+   ================================================ */
+
+.scale-75 {
+    transform: scale(0.75);
+}
+
+.scale-90 {
+    transform: scale(0.9);
+}
+
+.scale-100 {
+    transform: scale(1);
+}
+
+.scale-110 {
+    transform: scale(1.1);
+}
+
+.scale-125 {
+    transform: scale(1.25);
+}
+
+.rotate-45 {
+    transform: rotate(45deg);
+}
+
+.rotate-90 {
+    transform: rotate(90deg);
+}
+
+.rotate-180 {
+    transform: rotate(180deg);
+}
+
+/* ================================================
+   Z-INDEX UTILITIES
+   ================================================ */
+
+.z-auto {
+    z-index: auto;
+}
+
+.z-0 {
+    z-index: 0;
+}
+
+.z-10 {
+    z-index: 10;
+}
+
+.z-20 {
+    z-index: 20;
+}
+
+.z-30 {
+    z-index: 30;
+}
+
+.z-40 {
+    z-index: 40;
+}
+
+.z-50 {
+    z-index: 50;
+}
+
+/* ================================================
+   OPACITY UTILITIES
+   ================================================ */
+
+.opacity-0 {
+    opacity: 0;
+}
+
+.opacity-25 {
+    opacity: 0.25;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+.opacity-75 {
+    opacity: 0.75;
+}
+
+.opacity-100 {
+    opacity: 1;
+}

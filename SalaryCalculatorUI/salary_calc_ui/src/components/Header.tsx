@@ -1,29 +1,16 @@
-import styled from 'styled-components';
-
 export const Header = () => {
   return (
-    <StyledDiv>
-      <h2> Salary Calculator </h2>
+    <div className="app-header-section">
+      <h1 className="salary-calculator-title">Salary Calculator</h1>
       <SubHeading />
-    </StyledDiv>
+    </div>
   )
 }
 
-
 const SubHeading = () => {
   return (
-    <div>
-      <h5>Calculates Your Annual, Quaterly and Monthly in hand salary and tax</h5>
-    </div>
+    <p className="salary-calculator-subtitle">
+      Calculate your annual, quarterly, and monthly in-hand salary and applicable taxes
+    </p>
   );
 }
-
-const StyledDiv = styled.div`
-   padding : 25px;
-   >h2 {
-     margin : 0px
-   }
-   h5 {
-     margin : 0px;
-   }
-`;
