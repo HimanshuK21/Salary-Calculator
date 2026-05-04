@@ -132,14 +132,6 @@ In-Hand Salary = CTC - (Tax + Employee PF + Other Deductions)
 
 ---
 
-## ▶️ Demo
-
-> Add your API demo video below
-
-[![Watch Demo](https://img.shields.io/badge/Watch-Demo-blue)](PASTE_VIDEO_LINK_HERE)
-
----
-
 ## ⚙️ How to Run
 
 ```bash
