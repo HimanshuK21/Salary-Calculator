@@ -135,7 +135,6 @@ In-Hand Salary = CTC - (Tax + Employee PF + Other Deductions)
 ## ⚙️ How to Run
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/salary-calculator-api.git
 cd salary-calculator-api
 mvn clean install
 mvn spring-boot:run
